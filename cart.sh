@@ -1,20 +1,34 @@
 set -e
 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/cart.log 
+echo Setting NodeJS repos
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/cart.log
+
+echo Installing NodeJS
 yum install nodejs -y &>>/tmp/cart.log
 
+echo Adding Application User
 useradd roboshop &>>/tmp/cart.log
 
+echo Downloading Application Content
 curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>/tmp/cart.log
 cd /home/roboshop &>>/tmp/cart.log
+
+echo Cleaning old application content
 rm -rf cart &>>/tmp/cart.log
+
+echo Extract Application Archive
 unzip -o /tmp/cart.zip &>>/tmp/cart.log
 mv cart-main cart &>>/tmp/cart.log
 cd cart &>>/tmp/cart.log
+
+echo Installing NodeJS Dependencies
 npm install &>>/tmp/cart.log
 
+echo Configuring Cart SystemD Service
 mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>/tmp/cart.log
 systemctl daemon-reload &>>/tmp/cart.log
+
+echo Starting Cart Service
 systemctl start cart &>>/tmp/cart.log
 systemctl enable cart &>>/tmp/cart.log
 
