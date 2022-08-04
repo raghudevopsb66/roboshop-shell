@@ -3,7 +3,7 @@ useradd roboshop
 
 cd /home/roboshop
 curl -s -L -o /tmp/shipping.zip "https://github.com/roboshop-devops-project/shipping/archive/main.zip"
-unzip /tmp/shipping.zip
+unzip -o /tmp/shipping.zip
 mv shipping-main shipping
 cd shipping
 mvn clean package
