@@ -9,9 +9,9 @@ systemctl start mysqld
 
 DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
-echo "alter user 'root'@'localhost' identified with mysql_native_password by 'RoboShop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD}
+echo "alter user 'root'@'localhost' identified with mysql_native_password by '$MYSQL_PASSWORD';" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD}
 
-echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
+echo "uninstall plugin validate_password;" | mysql -uroot -p$MYSQL_PASSWORD
 #> uninstall plugin validate_password;
 
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
