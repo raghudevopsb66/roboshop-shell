@@ -7,9 +7,9 @@ yum install mysql-community-server -y
 systemctl enable mysqld
 systemctl start mysqld
 
-grep temp /var/log/mysqld.log
+DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
-mysql_secure_installation
+echo "alter user 'root'@'localhost' identified with mysql_native_password by 'RoboShop@1';" | mysql -uroot -p${DEFAULT_PASSWORD}
 
 mysql -uroot -pRoboShop@1
 #> uninstall plugin validate_password;
