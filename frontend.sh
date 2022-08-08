@@ -2,9 +2,8 @@
 
 # RoboShop - Frontend Setup
 
-source common.sh
-
 COMPONENT=frontend
+source common.sh
 
 echo Installing Nginx
 yum install nginx -y &>>${LOG}
