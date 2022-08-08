@@ -93,7 +93,7 @@ PYTHON() {
   echo Install Python Dependencies
   cd /home/roboshop/payment && pip3 install -r requirements.txt &>>${LOG}
   StatusCheck
-  
+
   SYSTEMD
 }
 

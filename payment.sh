@@ -1,5 +1,5 @@
 COMPONENT=payment
-source=payment
+source common.sh
 
 PYTHON
 
